@@ -155,7 +155,7 @@
     <externalSharingModel>Private</externalSharingModel>
     <label>Job Application</label>
     <nameField>
-        <label>Job Application Name</label>
+        <label>Application Name</label>
         <trackHistory>false</trackHistory>
         <type>Text</type>
     </nameField>
