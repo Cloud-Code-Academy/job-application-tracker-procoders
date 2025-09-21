@@ -6,6 +6,8 @@ export default class TakeHomeCalculator extends LightningElement {
 
     handleSalaryChange(event) {
         this.annualSalary = event.target.value;
+    }
+        calculateTakeHome(){
         this.takeHomeSalary = this.annualSalary * 0.70;
     }
     get formattedTakeHomeSalary() {
