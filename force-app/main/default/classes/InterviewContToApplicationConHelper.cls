@@ -39,7 +39,7 @@ public with sharing class InterviewContToApplicationConHelper {
         List<Job_Application_Contact__c> existingJobApplicationContactsList = [SELECT Id, Contact__c, Job_Application__c 
                                                                                 FROM Job_Application_Contact__c 
                                                                                 WHERE Job_Application__c IN :jobApplicationIds
-                                                                                AND Contact__c IN :contactIds];
+                                                                                AND Contact__c IN :contactIds WITH USER_MODE];
         
         
         for(Job_Application_Contact__c appContact :  existingJobApplicationContactsList) {

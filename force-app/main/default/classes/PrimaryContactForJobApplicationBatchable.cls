@@ -19,7 +19,8 @@ public with sharing class PrimaryContactForJobApplicationBatchable implements Da
                                         FROM 
                                             Job_Application__c 
                                         WHERE 
-                                            Primary_Contact__c = null]);
+                                            Primary_Contact__c = null
+                                            AND Application_Contact_Count__c > 0]);
     }
 
     /**
