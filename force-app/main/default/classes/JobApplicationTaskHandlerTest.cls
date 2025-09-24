@@ -51,5 +51,120 @@ public with sharing class JobApplicationTaskHandlerTest {
             tasks[0].Subject
         );
     }
+    @IsTest
+    static void testSavedToApplied() {
+        
+        Job_Application__c app = new Job_Application__c(
+            Name = 'Test App',
+            Application_Status__c = 'Applying'
+        );
+        insert app;
+
+        app.Application_Status__c = 'Applied';
+        update app; 
+        
+        List<Task> tasks = [
+            SELECT Subject, WhatId, Priority
+            FROM Task
+            WHERE WhatId = :app.Id
+        ];
+        System.assertEquals(4, tasks.size(), 'Four tasks should be created when status changes from Saved to Applied');
+
+        System.assertEquals('Reach out to the hiring manager or recruiter',
+            tasks[0].Subject
+        );
+    }
+    @IsTest
+    static void testSavedToInterviewing() {
+        
+        Job_Application__c app = new Job_Application__c(
+            Name = 'Test App',
+            Application_Status__c = 'Applied'
+        );
+        insert app;
+
+        app.Application_Status__c = 'Interviewing';
+        update app; 
+        
+        List<Task> tasks = [
+            SELECT Subject, WhatId, Priority
+            FROM Task
+            WHERE WhatId = :app.Id
+        ];
+        System.assertEquals(5, tasks.size(), 'Five tasks should be created when status changes from Saved to Applied');
+
+        System.assertEquals('Prepare your blurb or “tell me about yourself” response',
+            tasks[0].Subject
+        );
+    }
+    @IsTest
+    static void testSavedToNegotiating() {
+        
+        Job_Application__c app = new Job_Application__c(
+            Name = 'Test App',
+            Application_Status__c = 'Interviewing'
+        );
+        insert app;
+
+        app.Application_Status__c = 'Negotiating';
+        update app; 
+        
+        List<Task> tasks = [
+            SELECT Subject, WhatId, Priority
+            FROM Task
+            WHERE WhatId = :app.Id
+        ];
+        System.assertEquals(3, tasks.size(), 'Three tasks should be created when status changes from Saved to Applied');
+
+        System.assertEquals('Research your market value and know your numbers',
+            tasks[0].Subject
+        );
+    }
+    @IsTest
+    static void testSavedToAccepted() {
+        
+        Job_Application__c app = new Job_Application__c(
+            Name = 'Test App',
+            Application_Status__c = 'Negotiating'
+        );
+        insert app;
+
+        app.Application_Status__c = 'Accepted';
+        update app; 
+        
+        List<Task> tasks = [
+            SELECT Subject, WhatId, Priority
+            FROM Task
+            WHERE WhatId = :app.Id
+        ];
+        System.assertEquals(3, tasks.size(), 'Three tasks should be created when status changes from Saved to Applied');
+
+        System.assertEquals('Plan your resignation if applicable',
+            tasks[0].Subject
+        );
+    }
+    @IsTest
+    static void testSavedToClosed() {
+        
+        Job_Application__c app = new Job_Application__c(
+            Name = 'Test App',
+            Application_Status__c = 'Accepted'
+        );
+        insert app;
+
+        app.Application_Status__c = 'Closed';
+        update app; 
+        
+        List<Task> tasks = [
+            SELECT Subject, WhatId, Priority
+            FROM Task
+            WHERE WhatId = :app.Id
+        ];
+        System.assertEquals(2, tasks.size(), 'Two tasks should be created when status changes from Saved to Applied');
+
+        System.assertEquals('Send a follow-up email thanking the interviewer and asking for feedback',
+            tasks[0].Subject
+        );
+    }
 }
 
