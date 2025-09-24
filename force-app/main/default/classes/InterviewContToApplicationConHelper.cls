@@ -56,8 +56,27 @@ public with sharing class InterviewContToApplicationConHelper {
             }
         }
 
+        //if(!applicationContactToInsert.isEmpty()) {
+        //    Database.insert(applicationContactToInsert);
+        //}
+
         if(!applicationContactToInsert.isEmpty()) {
-            Database.insert(applicationContactToInsert);
-        }
+            try {
+                Database.SaveResult[] results = Database.insert(applicationContactToInsert, false);
+                
+                // Process the results and handle errors
+                for(Database.SaveResult result : results) {
+                    if (!result.isSuccess()) {
+                        for(Database.Error err : result.getErrors()) {
+                            if(err.getStatusCode() == StatusCode.REQUIRED_FIELD_MISSING) {
+                                throw new ApplicationException('Required field missing: ' + err.getMessage());
+                            }
+                        }
+                    }
+                }
+            } catch(DmlException e) {
+                throw new ApplicationException('Failed to create Job Application Contact: ' + e.getMessage());
+            }
+        }   
     }
 }
