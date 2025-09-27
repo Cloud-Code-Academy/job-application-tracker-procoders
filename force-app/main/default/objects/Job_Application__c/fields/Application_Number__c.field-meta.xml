@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Application_Number__c</fullName>
+    <description>A system-generated, sequential number assigned to each Job Application record. This unique identifier is automatically created when a new application is entered, providing an easy-to-reference ID (e.g., APP-0001, APP-0002). Used for tracking, reporting, and user-friendly record identification. This value is read-only and cannot be modified by users.</description>
+    <displayFormat>APP-{0000}</displayFormat>
+    <externalId>false</externalId>
+    <label>Application Number</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>AutoNumber</type>
+</CustomField>

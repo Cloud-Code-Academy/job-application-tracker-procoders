@@ -1,0 +1,28 @@
+<template>
+    <lightning-card title="Take Home Pay Calculator" icon-name="utility:money">
+    <div class="slds-p-around_medium">
+    
+        <lightning-input
+            type="number"
+            label="Enter Annual Salary"
+            onchange={handleSalaryChange}>
+        </lightning-input>
+
+        <p class="slds-m-top_medium slds-text-title_bold">
+            Take Home Salary (Annual): {formattedTakeHomeSalary}</p>
+
+        <p>Monthly Take Home Salary: {formattedMonthly}</p>
+        <p>Bi-Weekly Take Home Salary: {formattedBiWeekly}</p>
+        <p>Weekly Take Home Salary: {formattedWeekly}</p>
+        
+        
+        <lightning-button 
+            class="slds-m-top_xx-large"
+            variant="brand" 
+            label="Calculate" 
+            title="Calculate" 
+            onclick={calculateTakeHome}>
+        </lightning-button>
+    </div>
+    </lightning-card>
+</template>
