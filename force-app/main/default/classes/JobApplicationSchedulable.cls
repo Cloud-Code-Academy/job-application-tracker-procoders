@@ -1,5 +1,8 @@
-public with sharing class PrimaryContactForJobApplicationSchedule implements Schedulable{
+public with sharing class JobApplicationSchedulable implements Schedulable{
     public void execute(SchedulableContext sc) {
+        CleanupStaleJobApplications cleanStaleApps = new CleanupStaleJobApplications();
+        cleanStaleApps.after30DaysWithoutInteraction();
+        
         Database.executeBatch(new PrimaryContactForJobApplicationBatchable());
     }
 
