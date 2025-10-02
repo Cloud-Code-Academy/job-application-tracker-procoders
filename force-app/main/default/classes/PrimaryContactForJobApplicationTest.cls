@@ -76,7 +76,7 @@ public class PrimaryContactForJobApplicationTest {
     }
 
     @isTest
-    static void testPrimaryContactAssignmentSchedulable() {
+    static void testJobApplicationSchedulable() {
         // Get the Job Applications that should be updated
         List<Job_Application__c> jobAppsToCheck = [
             SELECT Id, Name 
@@ -87,11 +87,11 @@ public class PrimaryContactForJobApplicationTest {
         
         Test.startTest();
         //
-        PrimaryContactForJobApplicationSchedule jobPayLoad = new PrimaryContactForJobApplicationSchedule();
+        JobApplicationSchedulable jobPayload = new JobApplicationSchedulable();
         String year = String.valueOf(Date.today().year() + 1);
         String cronExpression = '0 0 2 * * ? ' + year;
-        String jobName = 'PrimaryContactForJobApplicationSchedule';
-        System.schedule(jobName, cronExpression, jobPayLoad);
+        String jobName = 'JobApplicationSchedulableTest';
+        System.schedule(jobName, cronExpression, jobPayload);
         jobPayLoad.execute(null);
         //
         Test.stopTest();
