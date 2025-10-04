@@ -1,0 +1,30 @@
+<template>
+    <lightning-card>
+        <h3 class="slds-card__header-title">Take-Home Pay</h3>
+        <div class="slds-p-around_medium">
+            <div class="slds-is-relative">
+                <lightning-icon icon-name="utility:moneybag" size="x-small" style="position:absolute;left:75px;top:1px"
+                    alternative-text="Salary"></lightning-icon>
+                <lightning-input label="Enter Salary:" type="number" maxlength="10" name="salaryInput" value={salary}
+                    onchange={calculatePay} onblur={showSalary}>
+                </lightning-input>
+            </div>
+
+            <br />
+
+            <h1 style="color:#ff00008f">Tax deductions : </h1>
+            <p style="margin-top: 5px;">Federal Tax: <span>{yearlyFederalIncomeTaxDisplay}</span></p>
+            <p>Social Security: <span>{yearlySocialSecurityTaxDisplay}</span></p>
+            <p>Medicare : <span>{yearlyMedicareWithholdingDisplay}</span></p>
+
+            <br />
+
+            <h1 style="color: green">Your estimated Take-home pay is : </h1>
+            <p style="margin-top: 5px;">Yearly Pay: <span>{yearlyPayDisplay}</span></p>
+            <p>Six Months Pay: <span>{sixMonthsPayDisplay}</span></p>
+            <p>Monthly Pay: <span>{monthlyPayDisplay}</span></p>
+            <p>Bi-Weekly Pay: <span>{biWeeklyPayDisplay}</span></p>
+        </div>
+    </lightning-card>
+    //weirdsourcer
+</template>
