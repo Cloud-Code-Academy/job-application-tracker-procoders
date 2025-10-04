@@ -38,3 +38,5 @@ public with sharing class CleanupStaleJobApplicationsTest {
         System.assertEquals(0, staleJobApps.size(), 'There should be no stale job applications');
     }
 }
+
+//weirdsourcer
