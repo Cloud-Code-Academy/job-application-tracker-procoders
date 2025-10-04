@@ -4,3 +4,4 @@ global class JoobleJobScheduler implements Schedulable {
         JoobleJobService.findAndSaveJobs('Salesforce Developer', 'Atlanta, GA', 10);
     }
 }
+//CLJ

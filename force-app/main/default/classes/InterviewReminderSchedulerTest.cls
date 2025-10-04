@@ -4,7 +4,7 @@ private class InterviewReminderSchedulerTest {
     @IsTest
     static void testSchedulerRuns() {
         
-        //Test user with a valid email
+        //Queries and create test user with a valid email
         Profile p = [SELECT Id FROM Profile WHERE Name = 'Standard User' LIMIT 1];
         User testUser = new User(
             FirstName = 'Test',
@@ -20,14 +20,14 @@ private class InterviewReminderSchedulerTest {
         );
         insert testUser;
 
-        //Setup Job Application
+        //Create a Job Application
         Job_Application__c app = new Job_Application__c(
             Name = 'Test Application',
             Application_Status__c = 'Interviewing'
         );
         insert app;
         
-        //Setup event
+        //Create event
         Date tomorrow = Date.today().addDays(1);
         Event ev = new Event(
             Subject = 'Interview with Hiring Manager', 
@@ -39,12 +39,13 @@ private class InterviewReminderSchedulerTest {
             Description   = 'Test Description'
         ); 
         insert ev;
-
+        //Begin test behavior
         Test.startTest();
 
         InterviewReminderScheduler scheduler = new InterviewReminderScheduler();
         scheduler.execute(null);
 
+        //End test behavior
         Test.stopTest();
 
         //Get the actual key prefix for Job_Application__c
@@ -54,4 +55,4 @@ private class InterviewReminderSchedulerTest {
         System.assertEquals(1, InterviewReminderScheduler.lastEmailCount, 'Expected one Interview reminder email to be created.');
         }
     }
-
+//CLJ

@@ -4,12 +4,14 @@ public with sharing class JobApplicationTaskHandler {
         List<Job_Application__c> newList,
         Map<Id, Job_Application__c> oldMap,
         Boolean isInsert,
-        Boolean isUpdate
-    ) {
+        Boolean isUpdate) {
+        
+        //List that holds task
         List<Task> tasksToInsert = new List<Task>(); 
 
         for (Job_Application__c newApp : newList) {
 
+        //Check for status change
         if (isUpdate && oldMap != null) {
             Job_Application__c oldApp = oldMap.get(newApp.Id);
 
@@ -98,11 +100,12 @@ public with sharing class JobApplicationTaskHandler {
         }
     }
 }
-
+        //Bulk insert tasks
         if (!tasksToInsert.isEmpty()) {
             insert tasksToInsert; 
         }
     }
+    //Create task 
     private static Task createTask(JoB_Application__c app, String subject) {
         Task t = new Task();
         t.Subject = subject;
@@ -114,4 +117,4 @@ public with sharing class JobApplicationTaskHandler {
     }
 }
     
- //clj
+ //CLJ
