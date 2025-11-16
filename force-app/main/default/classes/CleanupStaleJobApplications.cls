@@ -13,9 +13,7 @@ public with sharing class CleanupStaleJobApplications {
                                             WHERE 
                                                 Application_Status__c NOT IN ('Closed', 'Accepted') 
                                                 AND LastModifiedDate <= N_DAYS_AGO:30
-                                            ]
-                                            ) {
-
+        ]) {
             jobApp.Application_Status__c = 'Closed';
             jobApp.Notes__c = 'This Application was closed by CleanupStaleJobApplications.cls on' + System.now();
             jobAppsToInsert.add(jobApp);                                           
