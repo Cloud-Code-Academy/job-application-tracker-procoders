@@ -4,10 +4,14 @@ public with sharing class CleanupStaleJobApplications {
 
     //pull all stale applications, close them, and update the note to reflect the change
     public void after30DaysWithoutInteraction() {
+        // TODO: this query can break a limit for maximum query rows 50k
         for (Job_Application__c jobApp : [
                                             SELECT 
-                                                Id, Name, Application_Status__c, LastModifiedDate, Notes__c
-
+                                                Id,
+                                                Name,
+                                                Application_Status__c,
+                                                LastModifiedDate,
+                                                Notes__c
                                             FROM 
                                                 Job_Application__c
                                             WHERE 
@@ -16,9 +20,9 @@ public with sharing class CleanupStaleJobApplications {
         ]) {
             jobApp.Application_Status__c = 'Closed';
             jobApp.Notes__c = 'This Application was closed by CleanupStaleJobApplications.cls on' + System.now();
-            jobAppsToInsert.add(jobApp);                                           
+            jobAppsToInsert.add(jobApp);
         }
-
+        // TODO: this can break a limit for maximum DML rows 10k
         if(!jobAppsToInsert.isEmpty()) {
             Database.update(jobAppsToInsert);
         }
